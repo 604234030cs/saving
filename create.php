@@ -12,6 +12,7 @@ if (isset ($_POST['submit'])) {
     $statement  = $connection->prepare($sql);
     if ($statement->execute([$user_id,$list_type_id,$list_name,$amount,$date])){
         $message = 'data inserted successfully';
+        header("Location: index.php");
         
 
     }
