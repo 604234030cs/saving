@@ -4,7 +4,8 @@ require 'db.php';
 session_start();
 $id=$_SESSION['username'];
 $sql = "SELECT listsaving.list_id,listsaving.user_id,user.username, list_type.list_type_name,listsaving.list_name,listsaving.amount,listsaving.date 
-FROM user,listsaving,list_type WHERE user.username=listsaving.user_id AND listsaving.user_id like '$id' AND list_type.list_type_id=listsaving.list_type_id   ";
+FROM user,listsaving,list_type WHERE user.username=listsaving.user_id AND listsaving.user_id like '$id' AND list_type.list_type_id=listsaving.list_type_id
+AND list_type.list_type_id LIKE '2'   ";
 $statement = $connection->prepare($sql);
 $statement->execute();
 $people = $statement->fetchAll(PDO::FETCH_OBJ);

@@ -1,5 +1,9 @@
 <?php
 require 'db.php';
+require 'navbar.php';
+session_start();
+$id=$_SESSION['username'];
+$datevalid = date('Y-m-d', time());
 $message = '';
 if (isset ($_POST['submit'])) {
     $user_id = $_POST['user_id'];
@@ -13,6 +17,8 @@ if (isset ($_POST['submit'])) {
     if ($statement->execute([$user_id,$list_type_id,$list_name,$amount,$date])){
         $message = 'data inserted successfully';
         header("Location: index.php");
+        session_start();
+        $_SESSION['user_name']=$id;
         
 
     }
@@ -43,7 +49,7 @@ if (isset ($_POST['submit'])) {
             <form method="post">
                 <div class="form-group">
                     <label for="user_id	">รหัสผู้ใช้</label>
-                    <input type="text" name="user_id" id="user_id"  class="form-control" require>
+                    <input type="text" name="user_id" id="user_id"  class="form-control" value="<?=$_SESSION['username']?>"  require readonly>
                 </div>
                 <div class="form-group">
                     <label for="list_type_id">ประเภทรายการ</label><br>
@@ -60,7 +66,7 @@ if (isset ($_POST['submit'])) {
                 </div>
                 <div class="form-group">
                     <label for="date">วันทีทำรายการ</label>
-                    <input type="date" name="date" id="date" class="form-control">
+                    <input type="date" name="date" id="date" class="form-control" max="<?=$datevalid?>">
                 </div>
                  <div class="form-group">
                    <button type="submit" name ="submit" class="btn btn-info">Create a person</button>

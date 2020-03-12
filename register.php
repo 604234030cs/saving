@@ -1,57 +1,30 @@
-หน้า Log in
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Login</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    <?php
-        require('db.php');
-        session_start();
-
-        if(isset($_POST['usernmae'])) {
-            // removes backslashes
-            $username = stripslashes($_REQUEST['username']);
-            // escapes special characters in a string
-            $username = mysqli_real_escape_string($con, $username);
-            $password = stripslashes($_REQUEST['password']);
-            $password = mysqli_real_escape_string($con, $password);
+<?php require 'header.php'; ?>
 
 
-            $query = "SELECT * FROM users WHERE username='$username' AND password='".md5($password)."'";
 
-            $result = mysqli_query($con, $query) or die(mysql_error());
-            $row = mysqli_num_rows($result);
+<div class="container">
+  <div class = "card mt-5">
+    <div class = "card-header">
+    <h2>ลงชื่อเข้าใช้</h2>
+    </div>
+    <div class = "card-body">
+    <?php if(!empty($message)): ?>
+    <div class = "alert alert-success">
+    <?= $message; ?>
+    </div>
+    <?php endif; ?>
 
-            if($rows == 1) {
-                $_SESSION['username'] = $username;
+    <form action="login.php" method="post">        
+        <div class="form-group">  
+          <input type="username" name="username" id="username" class="form-control" placeholder = 'บัญชีผู้ใช้'></div>
+        <div class="form-group">
+          <input type="password" name="password" id="password" class="form-control" placeholder = 'รหัสผ่าน'></div>  
+        <div class="form-group">
+           <button type="submit" class="btn btn-info">เข้าสู่ระบบ</button>  &nbsp; <a href="test.php">สมัครบัญชีผู้ใช้</a></div>
+           
+      </form>
+    </div>
+  </div>
+</div>
 
-                header("Location: index.php");
-            } else {
-                echo "<div class='form'>
-                        <h3>Username/Password is incorrect.</h3>
-                        <br>Click here to <a href='loginn.php'>Login</a>
-                        </div>";
-            }
-        } else {
-    ?>
-            <div class="form">
-                <h1>Log in</h1>
-                <form action="" method="post"  name="login">
-                    <input type="text" name="username" placeholder="Username" required> <br>
-                    <input type="password" name="password" placeholder="Password" required> <br>
-                    
-                    <button type="submit" class="btn btn-success">เข้าสู่ระบบ</button>
-                    
-                    </form>
-                    <p>Not registered yet? <a href="registration.php">Register Here</a></p>
-            </div>
-            <?php } ?>
-</body>
 
-</html>

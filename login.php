@@ -1,49 +1,23 @@
 <?php
 require 'db.php';
-$messege = '';
-if(isset($_POST['name']) && isset($_POST['lastname'])){
-$name = $_POST['name'];
-$lastname = $_POST['lastname'];
-$sql = 'INSERT INTO login(name, lastname) VALUES(:name, :lastname)';
-$statement = $connection->prepare($sql);
-if($statement->execute([':name' => $name, ':lastname' => $lastname])){
-    header("Location: create.php");
-    }
+$username=$_POST['username'];
+$password=$_POST['password'];
 
+$sql="SELECT username, password, user_name, user_sname FROM user WHERE username=? AND password=?";
+$statement=$connection->prepare($sql);
+$statement->execute([$username, $password]);
+$username=$statement->fetch();
+$staff_name=$username['user_name'];
+$staff_sname=$username['user_sname'];
+$staff_id=$username['username'];
+if(isset($staff_name) && isset($staff_sname)){
+    session_start();
+    $_SESSION['user_name']=$staff_name;
+    $_SESSION['user_sname']=$staff_sname;
+    $_SESSION['username']=$staff_id;
+
+    header("Location:index.php");
+}else{
+    header("Location:register.php");
 }
-
 ?>
-<?php require 'header.php'; ?>
-<div class="container">
-<div class="card mt-5">
-<div class="card-header">
-<h2>Login</h2>
-</div>
-
-<div class="container login-container">
-<form method = "post" >
-       <div class = "form-group">
-        <label for="name">Name</label>
-        <input type ="text" name="name" id="name" class= "form-control">
-</div>
-<div class = "form-group">
-        <label for="lastname">lastname</label>
-        <input type ="lastname" name="lastname" id="lastname" class= "form-control">
-</div>
-<div class="form-group">
-    <button type="submit"  class="btn btn-info">เข้าสู่ระบบ</button>
-</form>
-</div>
-</div>
-</div>
-<?php require 'footer.php'; ?>
-            
-            
-            
-            
-            
-            
-            
-           
-
-                 

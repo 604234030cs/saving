@@ -8,11 +8,14 @@ $person = $statement->fetch(PDO::FETCH_OBJ);
 if (isset ($_POST['list_name']) && isset($_POST['amount']) ) {
   $name = $_POST['list_name'];
   $email = $_POST['amount'];
-  $sql = 'UPDATE listsaving SET list_name=:list_name, amount=:amount WHERE list_id=:list_id';
+  $list_type_id = $_POST['list_type_id'];
+  $date = $_POST['date'];
+  $sql = 'UPDATE listsaving SET list_name=:list_name, amount=:amount, list_type_id=:list_type_id, date=:date  WHERE list_id=:list_id';
   $statement = $connection->prepare($sql);
-  if ($statement->execute([':list_name' => $name, ':amount' => $email, ':list_id' => $id])) {
+  if ($statement->execute([':list_type_id'=> $list_type_id ,':list_name' => $name,':amount' => $email, ':date'=>$date,':list_id' => $id ])) {
     header("Location: index.php");
-  }
+    
+      }
 
 
 }
@@ -33,12 +36,16 @@ if (isset ($_POST['list_name']) && isset($_POST['amount']) ) {
       <?php endif; ?>
       <form method="post">
         <div class="form-group">
+          <label for="list_id">เลขที่รายการ</label>
+          <input value="<?= $person->list_id ; ?>" type="text" name="list_id" id="list_id"  class="form-control" readonly>
+        </div>
+        <div class="form-group">
           <label for="user_id">รหัสลูกค้า</label>
-          <input value="<?= $person->user_id ; ?>" type="text" name="user_id" id="user_id" class="form-control">
+          <input value="<?= $person->user_id ; ?>" type="text" name="user_id" id="user_id" class="form-control" readonly>
         </div>
         <div class="form-group">
           <label for="list_type_id">ประเภทรายการ</label>
-          <input value="<?= $person->list_type_id; ?>" type="text" name="list_type_id"id="list_type_id" class="form-control">
+          <input value="<?= $person->list_type_id; ?>" type="redio" name="list_type_id"id="list_type_id" class="form-control">
         </div>
         <div class="form-group">
           <label for="list_name">เนื่อหารายการ</label>
