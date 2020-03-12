@@ -15,6 +15,9 @@
         <a class="nav-link" href="incom.php">ดูข้อมูลรายการรายรับ<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
+        <a class="nav-link" href="users.php">ข้อมูลผู้ใช้<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
         <a class="nav-link" href="logout.php">ออกจากระบบ<span class="sr-only">(current)</span></a>
       </li>
     </ul>
