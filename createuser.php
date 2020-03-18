@@ -8,8 +8,10 @@ if (isset ($_POST['submit'])) {
     $user_sname = $_POST['user_sname'];
     $address = $_POST['address'];
     $phonenumber = $_POST['phonenumber'];
+    $title = '* กรุณากรอกข้อมูลให้ครบ';
     $sql = 'INSERT INTO user (username,password,user_name,user_sname,address,phonenumber)VALUES(?,?,?,?,?,?)';
-    echo $sql;
+    echo $title;
+    
     $statement  = $connection->prepare($sql);
     if ($statement->execute([$username,$password,$user_name,$user_sname,$address,$phonenumber])){
         $message = 'data inserted successfully';
@@ -22,13 +24,10 @@ if (isset ($_POST['submit'])) {
     else
     {
         
-
-    }
         
-
+    }
 
 }
-
 
 ?>
 <?php require 'header.php'; ?>
@@ -45,27 +44,27 @@ if (isset ($_POST['submit'])) {
              <?php endif; ?>
             <form method="post">
                 <div class="form-group">
-                    <label for="username">รหัสผู้ใช้</label>
+                    <label for="username">รหัสผู้ใช้</label><font color="red"> *</font>
                     <input type="text" name="username" id="username"  class="form-control" pattern = "s[0-9]{3}" title = "กรุณากรอกตัวอักษร s และตัวเลข 3 หลัก" require>
                 </div>
                 <div class="form-group">
-                    <label for="password">รหัสผ่าน</label>
+                    <label for="password">รหัสผ่าน</label><font color="red"> *</font>
                     <input type="text" name="password" id="password" class="form-control" require>
                 </div>
                 <div class="form-group">
-                    <label for="user_name">ชื่อผู้ใช้</label>
+                    <label for="user_name">ชื่อผู้ใช้</label><font color="red"> *</font>
                     <input type="text" name="user_name"id="user_name"  class="form-control"require>
                 </div>
                 <div class="form-group">
-                    <label for="user_sname">นามสกุล</label>
+                    <label for="user_sname">นามสกุล</label><font color="red"> *</font>
                     <input type="text" name="user_sname"id="user_sname"  class="form-control"require>
                 </div>
                 <div class="form-group">
-                    <label for="address">ที่อยู่</label>
+                    <label for="address">ที่อยู่</label><font color="red"> *</font>
                     <input type="text" name="address" id="address" class="form-control"require>
                 </div>
                 <div class="form-group">
-                    <label for="phonenumber">เบอร์โทรศัพท์</label>
+                    <label for="phonenumber">เบอร์โทรศัพท์</label><font color="red"> *</font>
                     <input type="text" name="phonenumber" id="phonenumber" class="form-control"require>
                 </div>
                  <div class="form-group">

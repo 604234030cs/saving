@@ -7,7 +7,7 @@ $sql = "SELECT listsaving.list_id,listsaving.user_id,user.username, list_type.li
 FROM user,listsaving,list_type WHERE user.username=listsaving.user_id AND listsaving.user_id like '$id' AND list_type.list_type_id=listsaving.list_type_id   ";
 $statement = $connection->prepare($sql);
 $statement->execute();
-$people = $statement->fetchAll(PDO::FETCH_OBJ);
+$listsaving = $statement->fetchAll(PDO::FETCH_OBJ);
  ?>
 <?php require 'header.php'; ?>
 <div class="container">
@@ -26,7 +26,7 @@ $people = $statement->fetchAll(PDO::FETCH_OBJ);
           <th>จำนวนเงิน</th>
           <th>วันที่</th>
         </tr>
-        <?php foreach($people as $person): ?>
+        <?php foreach($listsaving as $person): ?>
           <tr>
             <td><?= $person->list_id; ?></td>
             <td><?= $person->user_id; ?></td>

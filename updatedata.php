@@ -7,12 +7,12 @@ $statement->execute([':list_id' => $id ]);
 $person = $statement->fetch(PDO::FETCH_OBJ);
 if (isset ($_POST['list_name']) && isset($_POST['amount']) ) {
   $name = $_POST['list_name'];
-  $email = $_POST['amount'];
+  $amount = $_POST['amount'];
   $list_type_id = $_POST['list_type_id'];
   $date = $_POST['date'];
   $sql = 'UPDATE listsaving SET list_name=:list_name, amount=:amount, list_type_id=:list_type_id, date=:date  WHERE list_id=:list_id';
   $statement = $connection->prepare($sql);
-  if ($statement->execute([':list_type_id'=> $list_type_id ,':list_name' => $name,':amount' => $email, ':date'=>$date,':list_id' => $id ])) {
+  if ($statement->execute([':list_type_id'=> $list_type_id ,':list_name' => $name,':amount' => $amount, ':date'=>$date,':list_id' => $id ])) {
     header("Location: index.php");
     
       }

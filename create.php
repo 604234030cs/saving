@@ -12,7 +12,10 @@ if (isset ($_POST['submit'])) {
     $amount = $_POST['amount'];
     $date = $_POST['date'];
     $sql = 'INSERT INTO listsaving(user_id,list_type_id,list_name,amount,date)VALUES(?,?,?,?,?)';
-    echo $sql;
+    $title = 'กรุณากรอกข้อมูลให้ครบ';
+    
+    echo $title;
+
     $statement  = $connection->prepare($sql);
     if ($statement->execute([$user_id,$list_type_id,$list_name,$amount,$date])){
         $message = 'data inserted successfully';
@@ -48,25 +51,25 @@ if (isset ($_POST['submit'])) {
              <?php endif; ?>
             <form method="post">
                 <div class="form-group">
-                    <label for="user_id	">รหัสผู้ใช้</label>
+                    <label for="user_id	">รหัสผู้ใช้ </label><font color="red"> *</font>
                     <input type="text" name="user_id" id="user_id"  class="form-control" value="<?=$_SESSION['username']?>"  require readonly>
                 </div>
-                <div class="form-group">
-                    <label for="list_type_id">ประเภทรายการ</label><br>
-                    <input type="radio" name="list_type_id"id="list_type_id" value="1" class="frome-control">  รายรับ
+                <div class="form-group" require>
+                    <label for="list_type_id">ประเภทรายการ</label><font color="red"> *</font><br>
+                    <input type="radio" name="list_type_id"id="list_type_id" value="1" class="frome-control" >  รายรับ
                     <input type="radio" name="list_type_id"id="list_type_id" value="2" class="frome-control">  รายจ่าย
                 </div>
-                <div class="form-group">
-                    <label for="list_name">รายละเอียดรายการ</label>
-                    <input type="text" name="list_name"id="list_name"  class="form-control">
+                <div class="form-group" >
+                    <label for="list_name">รายละเอียดรายการ</label><font color="red"> *</font>
+                    <input type="text" name="list_name"id="list_name"  class="form-control" require>
                 </div>
                 <div class="form-group">
-                    <label for="amount">จำนวนเงิน</label>
+                    <label for="amount">จำนวนเงิน</label><font color="red"> *</font>
                     <input type="text" name="amount"id="amount"  class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="date">วันทีทำรายการ</label>
-                    <input type="date" name="date" id="date" class="form-control" max="<?=$datevalid?>">
+                    <label for="date">วันทีทำรายการ</label><font color="red"> *</font>
+                    <input type="date" name="date" id="date" class="form-control" max="<?=$datevalid?>" require>
                 </div>
                  <div class="form-group">
                    <button type="submit" name ="submit" class="btn btn-info">Create a person</button>

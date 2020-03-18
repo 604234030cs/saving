@@ -20,7 +20,7 @@
         <div class="form-group">
           <input type="password" name="password" id="password" class="form-control" placeholder = 'รหัสผ่าน'></div>  
         <div class="form-group">
-           <button type="submit" class="btn btn-info">เข้าสู่ระบบ</button>  &nbsp; <a href="test.php">สมัครบัญชีผู้ใช้</a></div>
+           <button type="submit" class="btn btn-info">เข้าสู่ระบบ</button>  &nbsp; <a href="createuser.php">สมัครบัญชีผู้ใช้</a></div>
            
       </form>
     </div>

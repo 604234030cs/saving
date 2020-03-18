@@ -14,7 +14,7 @@ $people = $statement->fetchAll(PDO::FETCH_OBJ);
 <div class="container">
   <div class="card mt-5">
     <div class="card-header">
-      <h2>รายการบันทึก รายรับ-รายจ่าย </h2>
+      <h2>รายการบันทึก รายจ่าย </h2>
       <input type="text" name="user_name" value="<?=$_SESSION['user_name']?>" readonly>
     </div>
     <div class="card-body">

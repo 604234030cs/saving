@@ -8,13 +8,13 @@ FROM user,listsaving,list_type WHERE user.username=listsaving.user_id AND listsa
 AND list_type.list_type_id LIKE '1'   ";
 $statement = $connection->prepare($sql);
 $statement->execute();
-$people = $statement->fetchAll(PDO::FETCH_OBJ);
+$listsaving = $statement->fetchAll(PDO::FETCH_OBJ);
  ?>
 <?php require 'header.php'; ?>
 <div class="container">
   <div class="card mt-5">
     <div class="card-header">
-      <h2>รายการบันทึก รายรับ-รายจ่าย </h2>
+      <h2>รายการบันทึก รายรับ </h2>
       <input type="text" name="user_name" value="<?=$_SESSION['user_name']?>" readonly>
     </div>
     <div class="card-body">
@@ -27,7 +27,7 @@ $people = $statement->fetchAll(PDO::FETCH_OBJ);
           <th>จำนวนเงิน</th>
           <th>วันที่</th>
         </tr>
-        <?php foreach($people as $person): ?>
+        <?php foreach($listsaving as $person): ?>
           <tr>
             <td><?= $person->list_id; ?></td>
             <td><?= $person->user_id; ?></td>
